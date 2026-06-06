@@ -37,12 +37,14 @@
 //
 
 // SUA SOLUÇÃO:
-
+function calcularXp(resolvido, nivel) {
+    return resolvido * nivel * 15;
+}
 
 // Para testar descomente as pŕoximas 3 linhas
-// console.log('---------- Desafio 01 ----------')
-// console.log(calcularXp(4, 2));   // 120
-// console.log(calcularXp(10, 3));  // 450
+console.log('---------- Desafio 01 ----------')
+console.log(calcularXp(4, 2));   // 120
+console.log(calcularXp(10, 3));  // 450
 
 
 // ------------------------------------------------------------
@@ -79,6 +81,22 @@
 // que acerta a faixa (assim você não precisa de "else").
 
 // SUA SOLUÇÃO:
+function definirFaixa(xp) {
+
+    if(xp < 200) {
+        return 'branca'
+    } 
+
+    if(xp < 500) {
+        return 'azul'
+    }
+
+    if(xp < 1000) {
+        return 'roxa'
+    }
+
+    return 'preta'
+}
 
 // Para testar descomente as pŕoximas 5 linhas
 // console.log('---------- Desafio 03 ----------')
@@ -99,11 +117,16 @@
 //          "Faixa <faixa> — <xp> XP"
 
 // SUA SOLUÇÃO:
+function perfilDoAluno(desafio, dificuldade) {
+    const xp = calcularXp(desafio, dificuldade);
+    const faixa = definirFaixa(xp)
+    return `Faixa ${faixa} - ${formatarXp(xp)}`;
+}
 
 // Para testar descomente as pŕoximas 3 linhas
 // console.log('---------- Desafio 04 ----------')
-// console.log(perfilDoNinja(10, 3));  // "Faixa azul — 450 XP"
-// console.log(perfilDoNinja(20, 4));  // "Faixa preta — 1200 XP"
+// console.log(perfilDoAluno(10, 3));  // "Faixa azul — 450 XP"
+// console.log(perfilDoAluno(20, 4));  // "Faixa preta — 1200 XP"
 
 
 // ------------------------------------------------------------
@@ -127,12 +150,19 @@ const turma = [
 ];
 
 // SUA SOLUÇÃO:
+function aplicarEmTodos(alunos, callback) {
+    const resultado = [];
+    for(let i = 0; i < alunos.length; i++) {
+        resultado.push(callback(alunos[i]));
+    }
+    return resultado;
+}
 
 // Para testar descomente as pŕoximas 5 linhas
 // console.log('---------- Desafio 05 ----------')
-// console.log(aplicarEmTodos(turma, n => calcularXp(n.desafios, n.dificuldade))); 
+console.log(aplicarEmTodos(turma, n => calcularXp(n.desafios, n.dificuldade))); 
 // // [ 450, 120, 1200 ]
-// console.log(aplicarEmTodos(turma, n => n.nome));
+console.log(aplicarEmTodos(turma, n => n.nome));
 // // [ 'Aiko', 'Bento', 'Caio' ]
 
 

@@ -42,7 +42,11 @@
 // estiver pronto".
 
 // SUA SOLUÇÃO:
-
+function lerSensor(callback) {
+  setTimeout(() => {
+    callback(23);
+  }, 1000);
+}
 
 // Para testar, descomente:
 // console.log('---------- Desafio 01 ----------');
@@ -64,11 +68,15 @@
 // aparecer ANTES da leitura.
 
 // SUA SOLUÇÃO:
-
+function lerSensorComTempo(temp, ms, callback) {
+  setTimeout(() => {
+    callback(temp);
+  }, ms)
+}
 
 // Para testar, descomente:
 // console.log('---------- Desafio 02 ----------');
-// lerSensorComTempo(18, 50, t => console.log('Sensor leu:', t));
+// lerSensorComTempo(35, 5000, t => console.log('Sensor leu:', t));
 // console.log('Essa linha aparece ANTES da leitura!');
 // // "Essa linha aparece ANTES da leitura!"
 // // depois de 50ms: "Sensor leu: 18"
@@ -89,15 +97,26 @@
 // Regra de ouro: todo setInterval precisa de um plano de parada.
 
 // SUA SOLUÇÃO:
+function lerCiclo() {
+  let ciclo = 0;
+  const interval = setInterval(() => {
+    ciclo++;
+    console.log(`Leitura ${ciclo}`);
+    if(ciclo === 3) {
+      clearInterval(interval);
+      console.log('Monitoramento encerrado')
+    }
+  }, 20);
+}
 
 
 // Para testar, descomente:
 // console.log('---------- Desafio 03 ----------');
-// (cole/rode sua solução; saída esperada:)
-// // Leitura 1
-// // Leitura 2
-// // Leitura 3
-// // Monitoramento encerrado
+// lerCiclo();
+// Leitura 1
+// Leitura 2
+// Leitura 3
+// Monitoramento encerrado
 
 
 // ------------------------------------------------------------
@@ -114,7 +133,13 @@
 // callback de sucesso de antes — só que agora com nome oficial.
 
 // SUA SOLUÇÃO:
-
+function lerSensorPromise(temp) {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve(temp);
+    }, 30)
+  })
+} 
 
 // Para testar, descomente:
 // console.log('---------- Desafio 04 ----------');
@@ -141,9 +166,9 @@
 
 
 // Para testar, descomente:
-// console.log('---------- Desafio 05 ----------');
-// lerSensorSeguro(25).then(t => console.log('OK:', t)).catch(e => console.log('Erro:', e));
-// lerSensorSeguro(999).then(t => console.log('OK:', t)).catch(e => console.log('Erro:', e));
+console.log('---------- Desafio 05 ----------');
+lerSensorSeguro(25).then(t => console.log('OK:', t)).catch(e => console.log('Erro:', e));
+lerSensorSeguro(999).then(t => console.log('OK:', t)).catch(e => console.log('Erro:', e));
 // // "OK: 25"
 // // "Erro: Leitura inválida: 999"
 
